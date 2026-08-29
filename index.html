@@ -237,6 +237,40 @@
 
   footer{max-width:1040px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:12.5px;text-align:center;line-height:1.7}
   footer .em{color:var(--ink);font-variant-numeric:tabular-nums}
+
+  /* ---- Timetable grid ---- */
+  .tt-hint{font-size:12px;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:6px}
+  .tt-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px;background:var(--surface);box-shadow:var(--shadow);-webkit-overflow-scrolling:touch}
+  table.tt{border-collapse:separate;border-spacing:0;min-width:900px;width:100%;table-layout:fixed}
+  .tt th,.tt td{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .tt tr th:last-child,.tt tr td:last-child{border-right:none}
+  .tt tbody tr:last-child th,.tt tbody tr:last-child td{border-bottom:none}
+  .tt thead th{
+    background:var(--surface-2);font-family:"Prompt",sans-serif;font-weight:600;
+    padding:8px 3px;text-align:center;font-variant-numeric:tabular-nums;
+  }
+  .tt thead th .ts{display:block;font-weight:600;color:var(--ink);font-size:12px}
+  .tt thead th .te{display:block;font-weight:500;color:var(--muted);font-size:10.5px}
+  .tt th.day-col,.tt td.day-col{
+    position:sticky;left:0;z-index:2;background:var(--surface-2);
+    width:66px;min-width:66px;font-family:"Prompt",sans-serif;text-align:center;
+  }
+  .tt th.day-col{font-weight:700;font-size:13.5px;color:var(--ink)}
+  .tt th.day-col small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);letter-spacing:.02em}
+  .tt thead th.corner{z-index:3;font-size:11px;font-weight:600;color:var(--muted)}
+  .tt tbody td{height:76px;vertical-align:top;padding:4px}
+  .tt tbody td.empty{background:
+    repeating-linear-gradient(135deg,transparent,transparent 7px,var(--faint) 7px,var(--faint) 8px);}
+  .tt .cell{
+    min-height:66px;height:100%;border-radius:8px;background:var(--primary-soft);
+    border:1px solid color-mix(in srgb,var(--primary) 24%,transparent);
+    padding:7px 8px;display:flex;flex-direction:column;gap:3px;
+  }
+  .tt .cell .cn{font-size:11.5px;font-weight:600;line-height:1.28;color:var(--primary-ink);font-family:"Prompt",sans-serif}
+  .tt .cell .cc{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:auto;padding-top:2px}
+  .tt-cap{font-size:12.5px;color:var(--muted);margin:12px 0 2px}
+  .tt-note-h{display:flex;align-items:center;gap:8px;margin:16px 0 9px;font-family:"Prompt",sans-serif;font-weight:600;font-size:13px;color:var(--muted)}
+  .tt-note-h::before{content:"";flex:0 0 3px;width:3px;height:14px;border-radius:2px;background:var(--muted);opacity:.55}
 </style>
 </head>
 <body>
@@ -254,6 +288,7 @@
 <div class="tabwrap">
   <div class="tabs" role="tablist" id="tabs">
     <button class="tab" role="tab" data-p="ov" aria-selected="true">ภาพรวม</button>
+    <button class="tab" role="tab" data-p="tt" aria-selected="false">ตารางเรียน</button>
     <button class="tab" role="tab" data-p="m1" aria-selected="false">เทอม 1 · Module 1</button>
     <button class="tab" role="tab" data-p="m2" aria-selected="false">เทอม 1 · Module 2</button>
     <button class="tab" role="tab" data-p="t2" aria-selected="false">เทอม 2</button>
@@ -263,6 +298,7 @@
 
 <main>
   <section class="panel active" id="ov" role="tabpanel"></section>
+  <section class="panel" id="tt" role="tabpanel"></section>
   <section class="panel" id="m1" role="tabpanel"></section>
   <section class="panel" id="m2" role="tabpanel"></section>
   <section class="panel" id="t2" role="tabpanel"></section>
@@ -306,32 +342,32 @@ const T3_COURSES=[
 
 const M1_WEEK=[
   {day:"ศุกร์",en:"Friday",slots:[
-    {t:"17.00",t2:"20.00",code:"6521901",name:"ภาษาอังกฤษและศัพท์ทางการแพทย์",eve:true},
+    {t:"17.00",t2:"21.30",code:"6521901",name:"ภาษาอังกฤษและศัพท์ทางการแพทย์",eve:true},
   ]},
   {day:"เสาร์",en:"Saturday",slots:[
-    {t:"08.00",t2:"11.00",code:"6522901",name:"กายวิภาคศาสตร์และสรีรวิทยาเบื้องต้น"},
-    {t:"14.00",t2:"15.30",code:"6522901",name:"กายวิภาคศาสตร์และสรีรวิทยาเบื้องต้น"},
+    {t:"08.00",t2:"12.30",code:"6522901",name:"กายวิภาคศาสตร์และสรีรวิทยาเบื้องต้น"},
+    {t:"14.00",t2:"18.30",code:"6522901",name:"กายวิภาคศาสตร์และสรีรวิทยาเบื้องต้น"},
     {t:"18.30",t2:"20.00",code:"6522905",name:"หลักกฎหมาย ขอบเขตและจริยธรรม",eve:true},
   ]},
   {day:"อาทิตย์",en:"Sunday",slots:[
-    {t:"08.00",t2:"09.30",code:"6521902",name:"พัฒนาการตามวัยกับความต้องการของมนุษย์"},
-    {t:"14.00",t2:"15.30",code:"6522902",name:"ระบบการทำงานหน่วยบริการสุขภาพ"},
+    {t:"08.00",t2:"12.30",code:"6521902",name:"พัฒนาการตามวัยกับความต้องการของมนุษย์"},
+    {t:"14.00",t2:"18.30",code:"6522902",name:"ระบบการทำงานหน่วยบริการสุขภาพ"},
     {t:"18.30",t2:"20.00",code:"6522903",name:"สุขภาพ อนามัยส่วนบุคคลและสิ่งแวดล้อม",eve:true},
   ]},
 ];
 const M2_WEEK=[
   {day:"ศุกร์",en:"Friday",slots:[
-    {t:"17.00",t2:"18.30",code:"6522906",name:"เทคนิคการช่วยเหลือดูแลบุคคลขั้นพื้นฐาน",eve:true},
+    {t:"17.00",t2:"21.30",code:"6522906",name:"เทคนิคการช่วยเหลือดูแลบุคคลขั้นพื้นฐาน",eve:true},
   ]},
   {day:"เสาร์",en:"Saturday",slots:[
-    {t:"08.00",t2:"11.00",code:"6522907",name:"การอภิบาลทารกและช่วยเหลือดูแลเด็ก"},
-    {t:"14.00",t2:"17.00",code:"6522909",name:"การช่วยเหลือดูแลสุขภาพบุคคลที่บ้านและในชุมชน"},
+    {t:"08.00",t2:"12.30",code:"6522907",name:"การอภิบาลทารกและช่วยเหลือดูแลเด็ก"},
+    {t:"14.00",t2:"18.30",code:"6522909",name:"การช่วยเหลือดูแลสุขภาพบุคคลที่บ้านและในชุมชน"},
     {t:"18.30",t2:"20.00",code:"6522910",name:"การช่วยเหลือดูแลบุคคลด้านสุขภาพจิต",eve:true},
   ]},
   {day:"อาทิตย์",en:"Sunday",slots:[
-    {t:"08.00",t2:"09.30",code:"6522908",name:"การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ"},
-    {t:"12.30",t2:"14.00",code:"6522908",name:"การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ"},
-    {t:"14.00",t2:"15.30",code:"6522904",name:"ระบบการจัดการอาหารสำหรับผู้ป่วย"},
+    {t:"08.00",t2:"12.30",code:"6522908",name:"การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ"},
+    {t:"14.00",t2:"15.30",code:"6522908",name:"การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ"},
+    {t:"15.30",t2:"18.30",code:"6522904",name:"ระบบการจัดการอาหารสำหรับผู้ป่วย"},
   ]},
 ];
 
@@ -416,7 +452,7 @@ document.getElementById('m1').innerHTML =
     `<span class="chip"><span class="dot" style="background:var(--theory)"></span>เรียน Online ภาคทฤษฎี</span>
      <span class="chip"><span class="dot" style="background:var(--exam)"></span>สอบ Onsite PIM แจ้งวัฒนะ</span>`)
   + `<div class="sec-title">รายวิชา (7 วิชา)</div>` + coursesBlock(M1_COURSES)
-  + `<div class="sec-title">ตารางสอนประจำสัปดาห์</div>` + weekBlock(M1_WEEK)
+  + `<div class="sec-title">ตารางเรียนประจำสัปดาห์</div>` + weekBlock(M1_WEEK)
   + `<div class="sec-title">วันสอบ & หมายเหตุ</div>` + notesBlock(M1_NOTES);
 
 document.getElementById('m2').innerHTML =
@@ -425,7 +461,7 @@ document.getElementById('m2').innerHTML =
     `<span class="chip"><span class="dot" style="background:var(--theory)"></span>เรียน Online ภาคทฤษฎี</span>
      <span class="chip"><span class="dot" style="background:var(--lab)"></span>ฝึกในห้องปฏิบัติการ EEC</span>`)
   + `<div class="sec-title">รายวิชา (6 วิชา)</div>` + coursesBlock(M2_COURSES)
-  + `<div class="sec-title">ตารางสอนประจำสัปดาห์</div>` + weekBlock(M2_WEEK)
+  + `<div class="sec-title">ตารางเรียนประจำสัปดาห์</div>` + weekBlock(M2_WEEK)
   + `<div class="sec-title">วันสอบ · ฝึกปฏิบัติ · หมายเหตุ</div>` + notesBlock(M2_NOTES);
 
 function clinicalPanel(id,tag,title,range,list){
@@ -478,6 +514,51 @@ document.getElementById('ov').innerHTML =
         </div>
       </div>`).join('')}
   </div>`;
+
+/* ---------- TIMETABLE GRID ---------- */
+const TIME_STARTS=["08.00","09.30","11.00","12.30","14.00","15.30","17.00","18.30","20.00"];
+const TIME_END="21.30";
+const colIndex=(t)=> t===TIME_END ? TIME_STARTS.length : TIME_STARTS.indexOf(t);
+
+function timetable(week){
+  let head='<tr><th class="day-col corner">วัน / เวลา</th>';
+  for(let i=0;i<TIME_STARTS.length;i++){
+    const end = i+1<TIME_STARTS.length ? TIME_STARTS[i+1] : TIME_END;
+    head+=`<th><span class="ts">${TIME_STARTS[i]}</span><span class="te">${end} น.</span></th>`;
+  }
+  head+='</tr>';
+  let rows='';
+  week.forEach(d=>{
+    const byCol={};
+    d.slots.forEach(s=>{const c=colIndex(s.t); byCol[c]={span:Math.max(1,colIndex(s.t2)-c), s};});
+    let tds='';
+    for(let c=0;c<TIME_STARTS.length;){
+      if(byCol[c]){
+        const {span,s}=byCol[c];
+        tds+=`<td colspan="${span}"><div class="cell"><div class="cn">${s.name}</div><div class="cc">${s.code}</div></div></td>`;
+        c+=span;
+      }else{ tds+=`<td class="empty"></td>`; c++; }
+    }
+    rows+=`<tr><th class="day-col">${d.day}<small>${d.en}</small></th>${tds}</tr>`;
+  });
+  return `<div class="tt-hint">↔ เลื่อนแนวนอนเพื่อดูตารางทั้งหมด</div>
+    <div class="tt-wrap"><table class="tt"><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
+}
+
+document.getElementById('tt').innerHTML =
+  `<div class="term-head">
+     <div class="tag">ตารางเรียนรายสัปดาห์</div>
+     <h2>ตารางเรียน ภาคทฤษฎี</h2>
+     <div class="range">เทอม 1 · เรียน Online วันศุกร์–อาทิตย์ · <b>Module 1–2</b></div>
+   </div>
+   <div class="sec-title">Module 1 · 4 ก.ย. – 1 ต.ค. 2569</div>`
+  + timetable(M1_WEEK)
+  + `<div class="tt-note-h">หมายเหตุ Module 1</div>`
+  + notesBlock(M1_NOTES)
+  + `<div class="sec-title">Module 2 · 6 พ.ย. 2569 – 24 ม.ค. 2570</div>`
+  + timetable(M2_WEEK)
+  + `<div class="tt-note-h">หมายเหตุ Module 2</div>`
+  + notesBlock(M2_NOTES);
 
 /* ---------- TABS ---------- */
 const tabs=[...document.querySelectorAll('.tab')];
