@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แผนการเรียน ผู้ช่วยพยาบาล PIM</title>
+<meta name="description" content="กำหนดการเรียนหลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา 2569">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#E9EFF6; --surface:#FFFFFF; --surface-2:#F2F7FC; --surface-3:#E7EFF8;
+    --ink:#14263D; --muted:#586B7E; --faint:#8598921a;
+    --line:#D6E1EC; --line-strong:#C0D2E2;
+    --primary:#1E5FA6; --primary-ink:#174C88; --primary-soft:#DBE8F7;
+    --exam:#B44228; --exam-soft:#F6E2DB;
+    --lab:#95651A; --lab-soft:#F3E7CF;
+    --theory:#0F857A; --theory-soft:#D6EDE9;
+    --shadow:0 1px 2px rgba(20,40,64,.05),0 8px 24px -12px rgba(20,40,64,.16);
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0B1420; --surface:#132234; --surface-2:#18293D; --surface-3:#1E3349;
+      --ink:#E6EEF7; --muted:#9BADC1; --faint:#ffffff0d;
+      --line:#26384C; --line-strong:#354A62;
+      --primary:#4E97DA; --primary-ink:#6FACE4; --primary-soft:#123049;
+      --exam:#E88066; --exam-soft:#3A211A;
+      --lab:#D9AC58; --lab-soft:#33280F;
+      --theory:#45B8AC; --theory-soft:#123833;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.5);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0B1420; --surface:#132234; --surface-2:#18293D; --surface-3:#1E3349;
+    --ink:#E6EEF7; --muted:#9BADC1; --faint:#ffffff0d;
+    --line:#26384C; --line-strong:#354A62;
+    --primary:#4E97DA; --primary-ink:#6FACE4; --primary-soft:#123049;
+    --exam:#E88066; --exam-soft:#3A211A;
+    --lab:#D9AC58; --lab-soft:#33280F;
+    --theory:#45B8AC; --theory-soft:#123833;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Prompt",system-ui,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.disp{font-family:"Prompt",system-ui,sans-serif}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---- Header ---- */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:color-mix(in srgb,var(--surface) 88%,transparent);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .head-inner{max-width:1040px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:14px}
+  .crest{
+    width:42px;height:42px;flex:0 0 42px;border-radius:12px;
+    background:linear-gradient(150deg,var(--primary),var(--primary-ink));
+    color:#fff;display:grid;place-items:center;font-size:22px;
+    box-shadow:0 4px 12px -4px color-mix(in srgb,var(--primary) 60%,transparent);
+  }
+  .head-txt{min-width:0;flex:1}
+  .head-txt .kick{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--primary-ink);font-weight:600;font-family:"Prompt",sans-serif}
+  .head-txt h1{margin:1px 0 0;font-size:clamp(16px,3.4vw,20px);font-weight:700;line-height:1.25}
+  .theme-btn{
+    flex:0 0 auto;width:38px;height:38px;border-radius:10px;cursor:pointer;
+    border:1px solid var(--line-strong);background:var(--surface-2);color:var(--ink);
+    display:grid;place-items:center;font-size:17px;transition:.15s;
+  }
+  .theme-btn:hover{background:var(--surface-3)}
+  .theme-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+  /* ---- Tabs ---- */
+  .tabwrap{position:sticky;top:71px;z-index:15;background:var(--bg);border-bottom:1px solid var(--line)}
+  .tabs{max-width:1040px;margin:0 auto;padding:0 12px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:0 0 auto;border:none;background:none;cursor:pointer;color:var(--muted);
+    font-family:"Prompt",sans-serif;font-size:14px;font-weight:600;
+    padding:13px 15px 11px;border-bottom:2.5px solid transparent;white-space:nowrap;transition:.15s;
+  }
+  .tab:hover{color:var(--ink)}
+  .tab[aria-selected="true"]{color:var(--primary-ink);border-bottom-color:var(--primary)}
+  .tab:focus-visible{outline:2px solid var(--primary);outline-offset:-4px;border-radius:6px}
+
+  /* ---- Layout ---- */
+  main{max-width:1040px;margin:0 auto;padding:26px 20px 80px}
+  .panel{display:none;animation:fade .35s ease}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.panel.active{animation:none}}
+
+  .term-head{margin-bottom:20px}
+  .term-head .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;font-family:"Prompt",sans-serif}
+  .term-head h2{margin:4px 0 2px;font-size:clamp(21px,4.6vw,29px);font-weight:700;text-wrap:balance;line-height:1.2}
+  .term-head .range{color:var(--muted);font-size:15px}
+  .term-head .range b{color:var(--ink);font-weight:600}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;
+    padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);
+  }
+  .chip .dot{width:7px;height:7px;border-radius:50%;flex:0 0 7px}
+  .chip.credit{background:var(--primary-soft);border-color:transparent;color:var(--primary-ink);font-weight:600}
+  .chip .b{font-weight:600;color:var(--ink)}
+
+  .sec-title{
+    display:flex;align-items:center;gap:11px;margin:32px 0 14px;
+    font-family:"Prompt",sans-serif;font-size:15px;font-weight:600;
+    letter-spacing:.01em;color:var(--ink);
+  }
+  .sec-title::before{content:"";flex:0 0 4px;width:4px;height:17px;border-radius:2px;background:var(--primary)}
+  .sec-title::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* ---- Course cards ---- */
+  .courses{display:grid;gap:9px}
+  .course{
+    display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;
+    background:var(--surface);border:1px solid var(--line);border-radius:11px;
+    padding:13px 15px;box-shadow:var(--shadow);transition:.15s;
+  }
+  .course:hover{border-color:var(--line-strong)}
+  .course .no{
+    width:30px;height:30px;flex:0 0 30px;border-radius:9px;background:var(--surface-3);
+    display:grid;place-items:center;font-family:"Prompt",sans-serif;
+    font-weight:600;font-size:14px;color:var(--muted);
+  }
+  .course .body{min-width:0}
+  .course .cname{font-weight:600;font-size:15.5px;line-height:1.35;color:var(--ink)}
+  .course .cmeta{margin-top:2px;font-size:12.5px;color:var(--muted);font-family:"Prompt",sans-serif}
+  .course .cmeta .code{font-variant-numeric:tabular-nums}
+  .course .cred{text-align:center;flex:0 0 auto}
+  .course .cred .n{font-family:"Prompt",sans-serif;font-weight:700;font-size:19px;color:var(--primary-ink);line-height:1}
+  .course .cred .lbl{font-size:10px;color:var(--muted);letter-spacing:.05em}
+  .course .cred .bd{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:2px}
+
+  /* ---- Weekly schedule ---- */
+  .week{display:grid;gap:12px}
+  .day{background:var(--surface);border:1px solid var(--line);border-radius:11px;overflow:hidden;box-shadow:var(--shadow)}
+  .day-head{
+    display:flex;align-items:center;gap:10px;padding:11px 16px;
+    background:var(--surface-2);border-bottom:1px solid var(--line);
+  }
+  .day-head .dname{font-family:"Prompt",sans-serif;font-weight:700;font-size:15px}
+  .day-head .dsub{font-size:12.5px;color:var(--muted)}
+  .day-head .cnt{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .slots{display:grid}
+  .slot{
+    display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start;
+    padding:11px 16px;border-top:1px solid var(--line);
+  }
+  .slot:first-child{border-top:none}
+  .slot .time{
+    font-family:"Prompt",sans-serif;font-variant-numeric:tabular-nums;
+    font-size:13px;font-weight:600;color:var(--ink);padding-top:1px;
+  }
+  .slot .time small{display:block;font-weight:500;color:var(--muted);font-size:11px}
+  .slot .subj{font-size:14.5px;line-height:1.4}
+  .slot .subj .code{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;font-family:"Prompt",sans-serif}
+  .slot.evening{background:color-mix(in srgb,var(--theory-soft) 40%,transparent)}
+
+  /* ---- Info / note cards ---- */
+  .notes{display:grid;gap:8px}
+  .note{
+    display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--nc,var(--primary));
+    border-radius:11px;padding:12px 14px;
+  }
+  .note{grid-template-columns:82px 1fr}
+  .note .ntag{
+    align-self:start;font-size:12px;font-weight:600;text-align:center;
+    padding:4px 6px;border-radius:7px;background:var(--ncs,var(--primary-soft));color:var(--nc);
+    font-family:"Prompt",sans-serif;letter-spacing:.01em;
+  }
+  .note .nt{font-size:14px;line-height:1.5}
+  .note .nt .lead{font-weight:600;color:var(--ink);font-family:"Prompt",sans-serif;font-size:13.5px}
+  .note .nt .when{color:var(--muted)}
+  .note .nt b{color:var(--nc);font-weight:600;font-variant-numeric:tabular-nums}
+  .note.exam{--nc:var(--exam);--ncs:var(--exam-soft)}
+  .note.lab{--nc:var(--lab);--ncs:var(--lab-soft)}
+  .note.theory{--nc:var(--theory);--ncs:var(--theory-soft)}
+
+  .clinical{
+    background:linear-gradient(150deg,var(--primary-soft),color-mix(in srgb,var(--primary-soft) 40%,var(--surface)));
+    border:1px solid color-mix(in srgb,var(--primary) 22%,transparent);
+    border-radius:13px;padding:20px 18px;display:flex;gap:15px;align-items:flex-start;
+  }
+  .clinical .ci{font-size:30px;line-height:1}
+  .clinical h3{margin:0 0 4px;font-size:17px;font-weight:700}
+  .clinical p{margin:0;font-size:14.5px;color:var(--muted)}
+  .clinical p b{color:var(--ink);font-weight:600}
+
+  /* ---- Overview timeline ---- */
+  .ov-lead{
+    background:var(--surface);border:1px solid var(--line);border-radius:13px;
+    padding:18px;margin-bottom:24px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;
+  }
+  .stat{text-align:center;padding:6px 4px}
+  .stat .v{font-family:"Prompt",sans-serif;font-weight:700;font-size:26px;color:var(--primary-ink);line-height:1;font-variant-numeric:tabular-nums}
+  .stat .k{font-size:12.5px;color:var(--muted);margin-top:5px}
+  .stat + .stat{border-left:1px solid var(--line)}
+  @media(max-width:520px){.stat + .stat{border-left:none}}
+
+  .timeline{position:relative;padding-left:8px}
+  .tl{position:relative;padding:0 0 8px 30px;border-left:2px solid var(--line);margin-left:8px}
+  .tl:last-child{border-left-color:transparent}
+  .tl::before{
+    content:"";position:absolute;left:-9px;top:3px;width:16px;height:16px;border-radius:50%;
+    background:var(--surface);border:3px solid var(--primary);box-sizing:border-box;
+  }
+  .tl.alt::before{border-color:var(--lab)}
+  .tl-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:11px;
+    padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow);cursor:pointer;transition:.15s;
+  }
+  .tl-card:hover{border-color:var(--line-strong);transform:translateY(-1px)}
+  .tl-card .tl-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;justify-content:space-between}
+  .tl-card h3{margin:0;font-size:16.5px;font-weight:700}
+  .tl-card .tl-date{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;font-family:"Prompt",sans-serif}
+  .tl-card .tl-desc{font-size:13.5px;color:var(--muted);margin-top:4px}
+  .tl-card .tl-cta{margin-top:9px;font-size:12.5px;font-weight:600;color:var(--primary-ink);font-family:"Prompt",sans-serif;display:inline-flex;align-items:center;gap:4px}
+  .mini-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+  .mini{font-size:11.5px;padding:3px 8px;border-radius:6px;background:var(--surface-3);color:var(--muted);font-variant-numeric:tabular-nums}
+  .mini.ex{background:var(--exam-soft);color:var(--exam)}
+  .mini.lb{background:var(--lab-soft);color:var(--lab)}
+
+  footer{max-width:1040px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:12.5px;text-align:center;line-height:1.7}
+  footer .em{color:var(--ink);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<header>
+  <div class="head-inner">
+    <div class="crest">✚</div>
+    <div class="head-txt">
+      <div class="kick">คณะพยาบาลศาสตร์ · PIM</div>
+      <h1>แผนการเรียน หลักสูตรผู้ช่วยพยาบาล</h1>
+    </div>
+    <button class="theme-btn" id="themeBtn" aria-label="สลับธีมสว่าง/มืด" title="สลับธีม">◐</button>
+  </div>
+</header>
+
+<div class="tabwrap">
+  <div class="tabs" role="tablist" id="tabs">
+    <button class="tab" role="tab" data-p="ov" aria-selected="true">ภาพรวม</button>
+    <button class="tab" role="tab" data-p="m1" aria-selected="false">เทอม 1 · Module 1</button>
+    <button class="tab" role="tab" data-p="m2" aria-selected="false">เทอม 1 · Module 2</button>
+    <button class="tab" role="tab" data-p="t2" aria-selected="false">เทอม 2</button>
+    <button class="tab" role="tab" data-p="t3" aria-selected="false">เทอม 3</button>
+  </div>
+</div>
+
+<main>
+  <section class="panel active" id="ov" role="tabpanel"></section>
+  <section class="panel" id="m1" role="tabpanel"></section>
+  <section class="panel" id="m2" role="tabpanel"></section>
+  <section class="panel" id="t2" role="tabpanel"></section>
+  <section class="panel" id="t3" role="tabpanel"></section>
+</main>
+
+<footer>
+  หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา 2569 · คณะพยาบาลศาสตร์ สถาบันการจัดการปัญญาภิวัฒน์<br>
+  ระยะเวลาหลักสูตร <span class="em">4 กันยายน 2569 – 29 สิงหาคม 2570</span> · รวม <span class="em">36 หน่วยกิต</span><br>
+  <span style="font-size:11.5px;opacity:.8">การสอบและวันเรียนบางส่วนรอ PIM แจ้งวัฒนะยืนยันอีกครั้ง · ยึดประกาศจากคณะฯ เป็นสำคัญ</span>
+</footer>
+
+<script>
+/* ---------- DATA ---------- */
+const M1_COURSES=[
+  {no:1,code:"6521901",th:"พย.ผช.1901",name:"ภาษาอังกฤษและศัพท์ทางการแพทย์",c:2,bd:"2-0-4"},
+  {no:2,code:"6522901",th:"พย.ผช.2901",name:"กายวิภาคศาสตร์และสรีรวิทยาเบื้องต้น",c:2,bd:"2-0-4"},
+  {no:3,code:"6521903",th:"พย.ผช.1903",name:"การสื่อสาร และการทำงานเป็นทีมในการให้บริการสุขภาพ",c:2,bd:"2-0-4"},
+  {no:4,code:"6522905",th:"พย.ผช.2905",name:"หลักกฎหมาย ขอบเขตและจริยธรรมในการปฏิบัติงานของผู้ช่วยพยาบาล",c:1,bd:"1-0-2"},
+  {no:5,code:"6521902",th:"พย.ผช.1902",name:"พัฒนาการตามวัยกับความต้องการของมนุษย์",c:2,bd:"2-0-4"},
+  {no:6,code:"6522903",th:"พย.ผช.2903",name:"สุขภาพ อนามัยส่วนบุคคลและสิ่งแวดล้อม",c:1,bd:"1-0-2"},
+  {no:7,code:"6522902",th:"พย.ผช.2902",name:"ระบบการทำงานหน่วยบริการสุขภาพ และการบำรุงรักษาอุปกรณ์ทางการแพทย์และการพยาบาล",c:2,bd:"2-0-4"},
+];
+const M2_COURSES=[
+  {no:1,code:"6522906",th:"พย.ผช.2906",name:"เทคนิคการช่วยเหลือดูแลบุคคลขั้นพื้นฐาน",c:3,bd:"2-3-5"},
+  {no:2,code:"6522907",th:"พย.ผช.2907",name:"การอภิบาลทารกและช่วยเหลือดูแลเด็ก",c:2,bd:"2-0-4"},
+  {no:3,code:"6522909",th:"พย.ผช.2909",name:"การช่วยเหลือดูแลสุขภาพบุคคลที่บ้านและในชุมชน",c:2,bd:"2-0-4"},
+  {no:4,code:"6522910",th:"พย.ผช.2910",name:"การช่วยเหลือดูแลบุคคลด้านสุขภาพจิต",c:1,bd:"1-0-2"},
+  {no:5,code:"6522908",th:"พย.ผช.2908",name:"การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ",c:3,bd:"3-0-6"},
+  {no:6,code:"6522904",th:"พย.ผช.2904",name:"ระบบการจัดการอาหารสำหรับผู้ป่วย",c:1,bd:"1-0-2"},
+];
+const T2_COURSES=[
+  {no:1,code:"6522951",th:"พย.ผช.2951",name:"ปฏิบัติการช่วยเหลือดูแลบุคคลขั้นพื้นฐาน",c:3,bd:"0-12-3"},
+  {no:2,code:"6522953",th:"พย.ผช.2953",name:"ปฏิบัติการช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ",c:3,bd:"0-12-3"},
+];
+const T3_COURSES=[
+  {no:1,code:"6522952",th:"พย.ผช.2952",name:"ปฏิบัติการอภิบาลทารกและช่วยเหลือดูแลเด็ก",c:2,bd:"0-8-2"},
+  {no:2,code:"6522954",th:"พย.ผช.2954",name:"ปฏิบัติการช่วยเหลือดูแลสุขภาพบุคคลที่บ้านและในชุมชน",c:2,bd:"0-8-2"},
+  {no:3,code:"6523951",th:"พย.ผช.3951",name:"ปฏิบัติการช่วยเหลือดูแลสุขภาพบุคคลในสถานพยาบาล",c:2,bd:"0-8-2"},
+];
+
+const M1_WEEK=[
+  {day:"ศุกร์",en:"Friday",slots:[
+    {t:"17.00",t2:"20.00",code:"6521901",name:"ภาษาอังกฤษและศัพท์ทางการแพทย์",eve:true},
+  ]},
+  {day:"เสาร์",en:"Saturday",slots:[
+    {t:"08.00",t2:"11.00",code:"6522901",name:"กายวิภาคศาสตร์และสรีรวิทยาเบื้องต้น"},
+    {t:"14.00",t2:"15.30",code:"6522901",name:"กายวิภาคศาสตร์และสรีรวิทยาเบื้องต้น"},
+    {t:"18.30",t2:"20.00",code:"6522905",name:"หลักกฎหมาย ขอบเขตและจริยธรรม",eve:true},
+  ]},
+  {day:"อาทิตย์",en:"Sunday",slots:[
+    {t:"08.00",t2:"09.30",code:"6521902",name:"พัฒนาการตามวัยกับความต้องการของมนุษย์"},
+    {t:"14.00",t2:"15.30",code:"6522902",name:"ระบบการทำงานหน่วยบริการสุขภาพ"},
+    {t:"18.30",t2:"20.00",code:"6522903",name:"สุขภาพ อนามัยส่วนบุคคลและสิ่งแวดล้อม",eve:true},
+  ]},
+];
+const M2_WEEK=[
+  {day:"ศุกร์",en:"Friday",slots:[
+    {t:"17.00",t2:"18.30",code:"6522906",name:"เทคนิคการช่วยเหลือดูแลบุคคลขั้นพื้นฐาน",eve:true},
+  ]},
+  {day:"เสาร์",en:"Saturday",slots:[
+    {t:"08.00",t2:"11.00",code:"6522907",name:"การอภิบาลทารกและช่วยเหลือดูแลเด็ก"},
+    {t:"14.00",t2:"17.00",code:"6522909",name:"การช่วยเหลือดูแลสุขภาพบุคคลที่บ้านและในชุมชน"},
+    {t:"18.30",t2:"20.00",code:"6522910",name:"การช่วยเหลือดูแลบุคคลด้านสุขภาพจิต",eve:true},
+  ]},
+  {day:"อาทิตย์",en:"Sunday",slots:[
+    {t:"08.00",t2:"09.30",code:"6522908",name:"การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ"},
+    {t:"12.30",t2:"14.00",code:"6522908",name:"การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ"},
+    {t:"14.00",t2:"15.30",code:"6522904",name:"ระบบการจัดการอาหารสำหรับผู้ป่วย"},
+  ]},
+];
+
+const M1_NOTES=[
+  {k:"exam",i:"📝",lead:"สอบกลางภาค",when:"3–4 ตุลาคม 2569",b:true},
+  {k:"exam",i:"📝",lead:"สอบปลายภาค",when:"31 ตุลาคม – 1 พฤศจิกายน 2569 · Onsite PIM แจ้งวัฒนะ",b:true},
+  {k:"theory",i:"⚖️",lead:"6522905 หลักกฎหมาย ขอบเขตและจริยธรรม",when:"เรียนวันที่ 12/9/69, 26/9/69 และ 17/10/69 เวลา 18.30–21.30 น."},
+  {k:"theory",i:"🧼",lead:"6522903 สุขภาพ อนามัยส่วนบุคคลและสิ่งแวดล้อม",when:"เรียนวันที่ 13/9/69, 27/9/69 และ 18/10/69 เวลา 18.30–21.30 น."},
+];
+const M2_NOTES=[
+  {k:"exam",i:"📝",lead:"สอบกลางภาค",when:"5–6 ธันวาคม 2569",b:true},
+  {k:"exam",i:"📝",lead:"สอบปลายภาค",when:"23–24 มกราคม 2570 · Onsite PIM แจ้งวัฒนะ",b:true},
+  {k:"lab",i:"🥼",lead:"6522906 เทคนิคการช่วยเหลือฯ — ฝึกในห้องปฏิบัติการ",when:"8/1/70 และ 15/1/70 เวลา 17.00–20.00 น. (Onsite PIM EEC)"},
+  {k:"lab",i:"🥼",lead:"6522906 เทคนิคการช่วยเหลือฯ — ฝึกในห้องปฏิบัติการ",when:"9–10/1/70 และ 16–17/1/70 เวลา 08.00–18.30 น. (Onsite PIM EEC)"},
+  {k:"theory",i:"🧠",lead:"6522910 การช่วยเหลือดูแลบุคคลด้านสุขภาพจิต",when:"เรียน 26/12/69 เวลา 18.30–21.30 น."},
+  {k:"theory",i:"🧓",lead:"6522908 การช่วยเหลือดูแลผู้ใหญ่และผู้สูงอายุ",when:"เรียน 20/12/69 เวลา 08.00–12.30 น. และ 14.00–18.30 น."},
+  {k:"theory",i:"📘",lead:"6522906 เทคนิคการช่วยเหลือฯ",when:"เรียน 22/1/70 เวลา 17.00–20.00 น."},
+];
+
+/* ---------- RENDER HELPERS ---------- */
+const el=(h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstElementChild;};
+const sum=(a)=>a.reduce((s,x)=>s+x.c,0);
+
+function courseCard(c){
+  return `<div class="course">
+    <div class="no num">${c.no}</div>
+    <div class="body">
+      <div class="cname">${c.name}</div>
+      <div class="cmeta"><span class="code">${c.code}</span> · ${c.th}</div>
+    </div>
+    <div class="cred">
+      <div class="n">${c.c}</div>
+      <div class="lbl">หน่วยกิต</div>
+      <div class="bd">(${c.bd})</div>
+    </div>
+  </div>`;
+}
+function coursesBlock(list){return `<div class="courses">${list.map(courseCard).join('')}</div>`;}
+
+function weekBlock(week){
+  return `<div class="week">${week.map(d=>`
+    <div class="day">
+      <div class="day-head">
+        <span class="dname">${d.day}</span>
+        <span class="dsub">${d.en}</span>
+        <span class="cnt num">${d.slots.length} คาบ</span>
+      </div>
+      <div class="slots">
+        ${d.slots.map(s=>`
+          <div class="slot${s.eve?' evening':''}">
+            <div class="time">${s.t}<small>– ${s.t2} น.</small></div>
+            <div class="subj">${s.name}<br><span class="code">${s.code}</span></div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('')}</div>`;
+}
+const NOTE_LABEL={exam:"สอบ",lab:"ฝึกปฏิบัติ",theory:"เรียนเสริม"};
+function notesBlock(list){
+  return `<div class="notes">${list.map(n=>`
+    <div class="note ${n.k}">
+      <div class="ntag">${NOTE_LABEL[n.k]||''}</div>
+      <div class="nt"><span class="lead">${n.lead}</span><br><span class="when">${n.b?'<b>':''}${n.when}${n.b?'</b>':''}</span></div>
+    </div>`).join('')}</div>`;
+}
+
+/* ---------- PANELS ---------- */
+function moduleHead(tag,title,range,credits,info){
+  return `<div class="term-head">
+    <div class="tag">${tag}</div>
+    <h2>${title}</h2>
+    <div class="range">${range}</div>
+    <div class="chips">
+      <span class="chip credit">${credits} หน่วยกิต</span>
+      ${info}
+    </div>
+  </div>`;
+}
+
+document.getElementById('m1').innerHTML =
+  moduleHead("ภาคการศึกษาที่ 1 · Module 1","วิชาพื้นฐานวิชาชีพ",
+    "<b>4 กันยายน – 1 ตุลาคม 2569</b>", sum(M1_COURSES),
+    `<span class="chip"><span class="dot" style="background:var(--theory)"></span>เรียน Online ภาคทฤษฎี</span>
+     <span class="chip"><span class="dot" style="background:var(--exam)"></span>สอบ Onsite PIM แจ้งวัฒนะ</span>`)
+  + `<div class="sec-title">รายวิชา (7 วิชา)</div>` + coursesBlock(M1_COURSES)
+  + `<div class="sec-title">ตารางสอนประจำสัปดาห์</div>` + weekBlock(M1_WEEK)
+  + `<div class="sec-title">วันสอบ & หมายเหตุ</div>` + notesBlock(M1_NOTES);
+
+document.getElementById('m2').innerHTML =
+  moduleHead("ภาคการศึกษาที่ 1 · Module 2","วิชาการดูแลตามกลุ่มวัย",
+    "<b>6 พฤศจิกายน 2569 – 24 มกราคม 2570</b>", sum(M2_COURSES),
+    `<span class="chip"><span class="dot" style="background:var(--theory)"></span>เรียน Online ภาคทฤษฎี</span>
+     <span class="chip"><span class="dot" style="background:var(--lab)"></span>ฝึกในห้องปฏิบัติการ EEC</span>`)
+  + `<div class="sec-title">รายวิชา (6 วิชา)</div>` + coursesBlock(M2_COURSES)
+  + `<div class="sec-title">ตารางสอนประจำสัปดาห์</div>` + weekBlock(M2_WEEK)
+  + `<div class="sec-title">วันสอบ · ฝึกปฏิบัติ · หมายเหตุ</div>` + notesBlock(M2_NOTES);
+
+function clinicalPanel(id,tag,title,range,list){
+  document.getElementById(id).innerHTML =
+    moduleHead(tag,title,`<b>${range}</b>`, sum(list),
+      `<span class="chip"><span class="dot" style="background:var(--primary)"></span>ขึ้นฝึกปฏิบัติ ณ โรงพยาบาลแหล่งฝึก</span>`)
+    + `<div class="clinical"><div class="ci">🏥</div><div><h3>ขึ้นฝึกปฏิบัติ ณ โรงพยาบาลแหล่งฝึก</h3><p>ภาคการศึกษานี้เป็นการ<b>ฝึกปฏิบัติเต็มเวลาในโรงพยาบาล</b> ไม่มีการเรียนออนไลน์ นักศึกษาปฏิบัติงานจริงภายใต้การนิเทศของอาจารย์และพยาบาลพี่เลี้ยง</p></div></div>`
+    + `<div class="sec-title">รายวิชาปฏิบัติ (${list.length} วิชา)</div>` + coursesBlock(list);
+}
+clinicalPanel('t2',"ภาคการศึกษาที่ 2","ฝึกปฏิบัติ · พื้นฐานและผู้สูงอายุ","29 มกราคม 2570 – 16 พฤษภาคม 2570",T2_COURSES);
+clinicalPanel('t3',"ภาคการศึกษาที่ 3","ฝึกปฏิบัติ · เด็ก ชุมชน และสถานพยาบาล","21 พฤษภาคม 2570 – 29 สิงหาคม 2570",T3_COURSES);
+
+/* ---------- OVERVIEW ---------- */
+const totalCredits = sum(M1_COURSES)+sum(M2_COURSES)+sum(T2_COURSES)+sum(T3_COURSES);
+const TIMELINE=[
+  {p:"m1",alt:false,tag:"ภาคเรียนที่ 1 · Module 1",date:"4 ก.ย. – 1 ต.ค. 2569",
+   desc:"วิชาพื้นฐานวิชาชีพ 7 วิชา · เรียน Online ภาคทฤษฎี",
+   chips:[`${sum(M1_COURSES)} หน่วยกิต`,{c:"ex",t:"สอบ 3–4 ต.ค."},{c:"ex",t:"สอบปลาย 31 ต.ค.–1 พ.ย."}]},
+  {p:"m2",alt:false,tag:"ภาคเรียนที่ 1 · Module 2",date:"6 พ.ย. 2569 – 24 ม.ค. 2570",
+   desc:"วิชาการดูแลตามกลุ่มวัย 6 วิชา · Online + ฝึกในห้องปฏิบัติการ",
+   chips:[`${sum(M2_COURSES)} หน่วยกิต`,{c:"ex",t:"สอบ 5–6 ธ.ค."},{c:"lb",t:"Lab 8–10 & 15–17 ม.ค."},{c:"ex",t:"สอบปลาย 23–24 ม.ค."}]},
+  {p:"t2",alt:true,tag:"ภาคเรียนที่ 2",date:"29 ม.ค. – 16 พ.ค. 2570",
+   desc:"ขึ้นฝึกปฏิบัติ ณ โรงพยาบาล · พื้นฐาน + ผู้ใหญ่/ผู้สูงอายุ",
+   chips:[`${sum(T2_COURSES)} หน่วยกิต`,{c:"",t:"ฝึกในโรงพยาบาล"}]},
+  {p:"t3",alt:true,tag:"ภาคเรียนที่ 3",date:"21 พ.ค. – 29 ส.ค. 2570",
+   desc:"ขึ้นฝึกปฏิบัติ ณ โรงพยาบาล · เด็ก ชุมชน และสถานพยาบาล",
+   chips:[`${sum(T3_COURSES)} หน่วยกิต`,{c:"",t:"ฝึกในโรงพยาบาล"}]},
+];
+document.getElementById('ov').innerHTML =
+  `<div class="term-head">
+    <div class="tag">ปีการศึกษา 2569</div>
+    <h2>ภาพรวมตลอดหลักสูตร</h2>
+    <div class="range">หลักสูตร 1 ปี · <b>4 กันยายน 2569 – 29 สิงหาคม 2570</b></div>
+  </div>
+  <div class="ov-lead">
+    <div class="stat"><div class="v">${totalCredits}</div><div class="k">หน่วยกิตรวม</div></div>
+    <div class="stat"><div class="v">3</div><div class="k">ภาคการศึกษา</div></div>
+    <div class="stat"><div class="v">18</div><div class="k">รายวิชา</div></div>
+    <div class="stat"><div class="v">2</div><div class="k">เทอมฝึก รพ.</div></div>
+  </div>
+  <div class="sec-title">เส้นทางการเรียน</div>
+  <div class="timeline">
+    ${TIMELINE.map(t=>`
+      <div class="tl ${t.alt?'alt':''}">
+        <div class="tl-card" data-go="${t.p}" role="button" tabindex="0">
+          <div class="tl-top"><h3>${t.tag}</h3><span class="tl-date">${t.date}</span></div>
+          <div class="tl-desc">${t.desc}</div>
+          <div class="mini-chips">${t.chips.map(c=>typeof c==='string'?`<span class="mini">${c}</span>`:`<span class="mini ${c.c}">${c.t}</span>`).join('')}</div>
+          <span class="tl-cta">ดูรายละเอียด →</span>
+        </div>
+      </div>`).join('')}
+  </div>`;
+
+/* ---------- TABS ---------- */
+const tabs=[...document.querySelectorAll('.tab')];
+function show(p){
+  tabs.forEach(t=>t.setAttribute('aria-selected', t.dataset.p===p));
+  document.querySelectorAll('.panel').forEach(pn=>pn.classList.toggle('active',pn.id===p));
+  window.scrollTo({top:0,behavior:'smooth'});
+  try{localStorage.setItem('ns-tab',p)}catch(e){}
+}
+document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)show(b.dataset.p);});
+document.getElementById('ov').addEventListener('click',e=>{const c=e.target.closest('[data-go]');if(c)show(c.dataset.go);});
+document.getElementById('ov').addEventListener('keydown',e=>{const c=e.target.closest('[data-go]');if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();show(c.dataset.go);}});
+try{const saved=localStorage.getItem('ns-tab');if(saved&&document.getElementById(saved))show(saved);}catch(e){}
+
+/* ---------- THEME ---------- */
+const tb=document.getElementById('themeBtn');
+function applyTheme(t){if(t)document.documentElement.setAttribute('data-theme',t);else document.documentElement.removeAttribute('data-theme');}
+try{const st=localStorage.getItem('ns-theme');if(st)applyTheme(st);}catch(e){}
+tb.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const isDark = cur ? cur==='dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  const next=isDark?'light':'dark';
+  applyTheme(next);
+  try{localStorage.setItem('ns-theme',next)}catch(e){}
+});
+</script>
+</body>
+</html>
